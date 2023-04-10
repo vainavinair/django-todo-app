@@ -3,14 +3,8 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView,CreateView,UpdateView,DeleteView
 from .models import Todo
 from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
+from django.forms.widgets import DateInput
 
-
-# @login_required(login_url='/user/login/')
-# def home(request):
-#     user = request.user.id
-#     todos = Todo.objects.filter(author=user)
-#     context = {'todos': todos}
-#     return render(request,'todo_home/todo_list.html',context)
 
 class TaskListView(LoginRequiredMixin, ListView):
     model = Todo
@@ -23,6 +17,13 @@ class TaskCreateView(LoginRequiredMixin, CreateView):
     model=Todo
     context_object_name="Task"
     fields=['title','decription','due_date']
+
+    
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class)
+        form.fields['due_date'].widget = DateInput(attrs={'type': 'date'}, format='%Y-%m-%d')
+        return form
+
     def form_valid(self, form):
         form.instance.author=self.request.user
         return super().form_valid(form)
@@ -30,6 +31,12 @@ class TaskCreateView(LoginRequiredMixin, CreateView):
 class TaskUpdateView(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
     model=Todo
     fields=['title','decription','due_date']
+
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class)
+        form.fields['due_date'].widget = DateInput(attrs={'type': 'date'}, format='%Y-%m-%d')
+        return form
+
     def form_valid(self, form):
         form.instance.author=self.request.user
         return super().form_valid(form)
