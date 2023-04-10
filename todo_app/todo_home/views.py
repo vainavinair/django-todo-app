@@ -1,8 +1,8 @@
 from django.shortcuts import get_object_or_404, render
 from django.contrib.auth.decorators import login_required
-from django.views.generic import ListView,CreateView,UpdateView
+from django.views.generic import ListView,CreateView,UpdateView,DeleteView
 from .models import Todo
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
 
 
 # @login_required(login_url='/user/login/')
@@ -27,9 +27,24 @@ class TaskCreateView(LoginRequiredMixin, CreateView):
         form.instance.author=self.request.user
         return super().form_valid(form)
 
-class TaskUpdateView(LoginRequiredMixin,UpdateView):
+class TaskUpdateView(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
     model=Todo
     fields=['title','decription','due_date']
     def form_valid(self, form):
         form.instance.author=self.request.user
         return super().form_valid(form)
+    def test_func(self):
+        task= self.get_object()
+        if self.request.user==task.author:
+            return True
+        return False
+
+    
+class TaskDeleteView(LoginRequiredMixin,UserPassesTestMixin,DeleteView):
+    model= Todo
+    success_url='/'
+    def test_func(self):
+        task= self.get_object()
+        if self.request.user==task.author:
+            return True
+        return False

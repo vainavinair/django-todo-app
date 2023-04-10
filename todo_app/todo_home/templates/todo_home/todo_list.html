@@ -8,7 +8,7 @@
                 <div class="card-body">
                     <h5 class="card-title">{{ todo.decription }}</h5>
                     <p class="card-text">Due Date: <b>{{ todo.due_date }}</b></p>
-                    <a href="#" class="btn btn-primary">Delete</a>
+                    <a href="{% url 'todo-delete' todo.id %}" class="btn btn-primary">Delete</a>
                     <a href="{% url 'todo-update' todo.id %}" class="btn btn-primary">Update</a>
                 </div>
             </div>
