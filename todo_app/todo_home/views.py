@@ -16,12 +16,14 @@ class TaskListView(LoginRequiredMixin, ListView):
 class TaskCreateView(LoginRequiredMixin, CreateView):
     model=Todo
     context_object_name="Task"
-    fields=['title','decription','due_date']
+    fields=['title','description','due_date']
 
     
     def get_form(self, form_class=None):
         form = super().get_form(form_class)
-        form.fields['due_date'].widget = DateInput(attrs={'type': 'date'}, format='%Y-%m-%d')
+        form.fields['due_date'].widget = DateInput(attrs={'type': 'date', 'placeholder':'enter the due date'}, format='%Y-%m-%d')
+        form.fields['title'].widget.attrs.update({'placeholder': 'Enter the title of Task'})
+        form.fields['description'].widget.attrs.update({'placeholder': 'Enter the description of Task'})
         return form
 
     def form_valid(self, form):
@@ -30,7 +32,7 @@ class TaskCreateView(LoginRequiredMixin, CreateView):
 
 class TaskUpdateView(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
     model=Todo
-    fields=['title','decription','due_date']
+    fields=['title','description','due_date']
 
     def get_form(self, form_class=None):
         form = super().get_form(form_class)
