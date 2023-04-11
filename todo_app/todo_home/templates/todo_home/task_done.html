@@ -1,0 +1,11 @@
+{% extends 'todo_home/base.html' %}
+{% block content %}
+{% for todo in todos %}
+<div class="container col-10 m-4">
+    <ul class="list-group">
+        <li class="list-group-item"> <b>Title: </b>{{ todo.title }}</li>
+        <li class="list-group-item"><b>Description: </b>{{ todo.description }}</li>
+    </ul>
+</div>
+{% endfor %}
+{% endblock content %}

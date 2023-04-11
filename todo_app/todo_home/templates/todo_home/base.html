@@ -26,10 +26,16 @@
             <a class="nav-link me-3" href="{% url 'todo-create' %}"><b>Add Task</b></a>
           </li>
           <li class="nav-item">
+            <a class="nav-link me-3" href="{% url 'todo-tasks-done' %}"><b>Completed Tasks</b></a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link me-3" href="{% url 'user-profile' %}"><b>Account</b></a>
           </li>
           <li class="nav-item">
             <a class="nav-link me-3" href="{% url 'user-logout' %}"><b>Logout</b></a>
+          </li>    
+          <li class="nav-item">
+            <a href="{% url 'user-profile' %}"><img src="{{ user.profile.image.url }}" alt="..."  class="rounded-circle" width="30"></a>
           </li>    
           {% else %}
           <li class="nav-item">

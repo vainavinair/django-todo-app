@@ -8,8 +8,9 @@
                 <div class="card-body">
                     <h5 class="card-title">{{ todo.description }}</h5>
                     <p class="card-text">Due Date: <b>{{ todo.due_date }}</b></p>
-                    <a href="{% url 'todo-delete' todo.id %}" class="btn btn-primary">Delete</a>
-                    <a href="{% url 'todo-update' todo.id %}" class="btn btn-primary">Update</a>
+                    <a href="{% url 'todo-done' todo.id %}" class="btn btn-primary">Mark as Done</a>
+                    <a href="{% url 'todo-update' todo.id %}" class="btn btn-secondary">Update</a>
+                    <a href="{% url 'todo-delete' todo.id %}" class="btn btn-danger">Delete</a>
                 </div>
             </div>
         </div>
