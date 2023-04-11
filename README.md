@@ -1,2 +1,1 @@
-# Todo List Application using Django
-
+# Todo-App using Django Python

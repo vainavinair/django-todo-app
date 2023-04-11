@@ -1,0 +1,43 @@
+{% extends "todo_home/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="container my-3">
+    <div class="row">
+        <div class="col-7">
+            <div class="jumbotron">
+                <h1 class="display-4">{{ user.username }}</h1>
+                <p class="lead">Email: {{ user.email }}</p>
+                <hr class="my-4">
+                <p>
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <fieldset class="form-group">
+                        <legend class="border-bottom bm-4">
+                            Update Profile
+                        </legend>
+                        {{ u_form|crispy }}
+                        {{ p_form|crispy }}
+                    </fieldset>
+                    <div class="form-group">
+                    <button class="btn btn-outline-primary m-2" type="submit">
+                        Update
+                    </button>
+                </div>
+                </form>
+                </p>
+            </div>
+        </div>
+        <div class=" col-4 ms-auto ">
+            <div class="card">
+                <img class="card-img-top" src="{{ user.profile.image.url }}" alt="profile-image" , width="200" ,
+                    height="300">
+                <div class="card-body">
+                    <h1 class="text-center">{{ user.username }}</h1>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock content %}
