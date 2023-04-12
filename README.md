@@ -1,1 +1,1 @@
-# Todo-App using Django Python
+# Todo-App using Django 
