@@ -5,7 +5,6 @@ This is a simple Django Todo-List app
 
 The app will be a task manager where users can create, read, update, and delete tasks. Users will also be able to authenticate themselves, view a list of completed tasks, and upload profile pictures.
 
----
 ## Screenshots
 
 <h4>Login Page</h4>
